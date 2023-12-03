@@ -13,7 +13,7 @@ vocab:
   extra_space_vocab_size: 38 # extra space for code tokenization vocab size
 
 data:
-  data_module: ClassifyImageNetDataModule
+  data_module: Curriculum1ConceptDataModule
   dataset_dir: tmp_ImageCode/
   dataset_img_dir: data/imagenet21k_resized/imagenet21k_train/
   max_position_embeddings: 1024 # from model.config
