@@ -1,5 +1,5 @@
 # ViStruct: Visual Structural Knowledge Extraction via Curriculum Guided Code-Vision Representation
-Code and data of the EMNLP 2023 paper "ViStruct: Visual Structural Knowledge Extraction via Curriculum Guided Code-Vision Representation"
+Code and data of the EMNLP 2023 [paper](https://arxiv.org/abs/2311.13258) "ViStruct: Visual Structural Knowledge Extraction via Curriculum Guided Code-Vision Representation"
 
 # Environment
 ```bash
