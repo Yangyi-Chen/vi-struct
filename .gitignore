@@ -2,6 +2,16 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.DS_Store
+*.DS_Store
+.idea
+.idea/
+__pycache__/
+*__pycache__/
+*.egg-info/
+src/eval
+src/img2code
+data
 
 # C extensions
 *.so

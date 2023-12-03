@@ -1,0 +1,109 @@
+output_dir: data/models/training/OFA-base+mix_curriculum
+
+model:
+  model_module: OFAModule
+  ckpt_dir: data/checkpoints/huggingface/OFA-base
+  resume_from_checkpoint: data/models/training/OFA-base+mix_curriculum/version_2/checkpoints/final-checkpoint.ckpt
+
+vocab:
+  code_vocab_size: 8192 # img token vocab size
+  loc_vocab_size: 1000 # location token vocab size
+  extra_space_vocab_size: 38 # extra space for code tokenization vocab size
+
+data:
+  data_module: Curriculum3AttributeDataModule
+  batch_size: 2
+  num_workers: 4
+
+
+classifyImage:
+  data:
+    data_module: ClassifyImageNetDataModule
+    dataset_img_dir: data/imagenet21k_resized/imagenet21k_train/
+    dataset_dir: tmp_ImageCode/
+    max_position_embeddings: 1024 # from model.config
+    code_file: buffer_claasification_imagenet21k.json
+
+
+
+
+detection_coco:
+  data:
+    data_module: DetectionCocoDataModule
+    dataset_dir: tmp_ImageCode/
+    dataset_img_dir: data/COCO/train2017/
+    max_position_embeddings: 1024 # from model.config
+    mask:
+        object_mask_prob: 0.5
+        pos_mask_ratio: 0.75
+    code_file: buffer_detection_COCO.json
+
+
+detection_object365:
+  data:
+    data_module: DetectionObject365DataModule
+    dataset_dir: tmp_ImageCode/
+    dataset_img_dir: data/object365/
+    max_position_embeddings: 1024 # from model.config
+    mask:
+        object_mask_prob: 0.5
+        pos_mask_ratio: 0.75
+    code_file: buffer_detection_object365.json
+
+detection_openimages:
+  data:
+    data_module: DetectionOpenimagesDataModule
+    dataset_dir: tmp_ImageCode/
+    dataset_img_dir: data/OpenImage/
+    max_position_embeddings: 1024 # from model.config
+    mask:
+      object_mask_prob: 0.5
+      pos_mask_ratio: 0.75
+    code_file: buffer_detection_openimages.json
+
+
+
+
+
+attribute_ovad:
+  data:
+    data_module: AttributeOvadDataModule
+    dataset_dir: tmp_ImageCode/
+    dataset_img_dir: data/COCO/train2017/
+    max_position_embeddings: 1024 # from model.config
+    mask:
+      attribute_mask_prob: 0.75
+      object_mask_prob: 0.5
+      pos_mask_ratio: 0.75
+    code_file: attribute_ovad.json
+
+
+
+
+
+attribute_LSA:
+  data:
+    data_module: AttributeLSADataModule
+    dataset_dir: tmp_ImageCode/
+    dataset_img_dir: data/
+    max_position_embeddings: 1024 # from model.config
+    mask:
+      attribute_mask_prob: 0.75
+      object_mask_prob: 0.5
+      pos_mask_ratio: 0.75
+    code_file: attribute_LSA.json
+
+
+
+
+
+training:
+  max_epochs: 10
+  optimizer:
+    lr: 1.e-4
+    weight_decay: 1.e-2
+  precision: 16
+  # save checkpoint every n optimization steps (actual_step / accumulate_grad_batches)
+  checkpoint_every_n_steps: 1000 # approx 1 hr
+  # OFA originally use 2048 batchsize
+  accumulate_grad_batches: 256 # 2048/(2*4)=256

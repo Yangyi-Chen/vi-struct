@@ -1,0 +1,45 @@
+output_dir: data/models/training/OFA-base+mix_curriculum
+
+model:
+  model_module: OFAModule
+  ckpt_dir: data/checkpoints/huggingface/OFA-base
+#  resume_from_checkpoint: /shared/nas/data/m1/xingyao6/projects/vi-struct/data/models/training/OFA-base+code/version_0/epoch=1-step=7400.ckpt
+  resume_from_checkpoint: data/models/training/OFA-base+mix/version_11/checkpoints/final-checkpoint.ckpt
+
+
+vocab:
+  code_vocab_size: 8192 # img token vocab size
+  loc_vocab_size: 1000 # location token vocab size
+  extra_space_vocab_size: 38 # extra space for code tokenization vocab size
+
+data:
+  data_module: ClassifyImageNetDataModule
+  dataset_dir: tmp_ImageCode/
+  dataset_img_dir: data/imagenet21k_resized/imagenet21k_train/
+  max_position_embeddings: 1024 # from model.config
+  batch_size: 8
+  num_workers: 4
+  code_file: claasification_imagenet21k.json
+
+#  mask:
+#    object_mask_prob: 0.5
+#    pos_mask_ratio: 0.5
+#    attribute_mask_ratio: 0.25
+#    object_mask_ratio: 0.5
+#    relation_mask_ratio: 0.5
+#    relation_object_mask_ratio: 0.5
+
+
+
+
+
+training:
+  max_epochs: 6
+  optimizer:
+    lr: 1.e-4
+    weight_decay: 1.e-2
+  precision: 16
+  # save checkpoint every n optimization steps (actual_step / accumulate_grad_batches)
+  checkpoint_every_n_steps: 10000 # approx 1 hr
+  # OFA originally use 2048 batchsize
+  accumulate_grad_batches: 64 # 2048/(2*4)=256

@@ -1,0 +1,9 @@
+name: vi-struct
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - ipykernel
+  - pip
+  - pip:
+    - -r requirements.txt
