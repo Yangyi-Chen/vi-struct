@@ -3,9 +3,10 @@ Code and data of the EMNLP 2023 [paper](https://arxiv.org/abs/2311.13258) "ViStr
 
 # Environment
 ```bash
+conda env create -f environment.yml
+conda activate vi-struct
 git clone --single-branch --branch feature/add_transformers https://github.com/OFA-Sys/OFA.git
 pip install OFA/transformers/
-conda env create -f environment.yml
 ```
 
 # Curriculum Guided Pretraining
