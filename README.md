@@ -8,8 +8,22 @@ pip install OFA/transformers/
 conda env create -f environment.yml
 ```
 
+# Curriculum Guided Pretraining
+## Data Preparation
+### Download the ImageCode data
+```bash
+bash data/download.sh
+```
 
-## Citation
+## Train model
+```bash
+export PYTHONPATH=`pwd`:$PYTHONPATH
+PYTHONPATH=`pwd`:$PYTHONPATH python3 src/scripts/model/train.py configs/base-concept.yml
+```
+
+
+
+# Citation
 
 Please kindly cite our [paper](https://arxiv.org/abs/2311.13258):
 

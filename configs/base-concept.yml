@@ -14,7 +14,7 @@ vocab:
 
 data:
   data_module: Curriculum1ConceptDataModule
-  dataset_dir: tmp_ImageCode/
+  dataset_dir: ImageCode/
   dataset_img_dir: data/imagenet21k_resized/imagenet21k_train/
   max_position_embeddings: 1024 # from model.config
   batch_size: 8

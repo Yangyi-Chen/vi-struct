@@ -1,6 +1,6 @@
 import torch
 import pytorch_lightning as pl
-from .Curriculum1ConceptDataModul import ClassifyImageNetDataModule
+from .Curriculum1ConceptDataModule import ClassifyImageNetDataModule
 from .detection_openimages import DetectionOpenimagesDataModule
 from .detection_coco import DetectionCocoDataModule
 from .detection_object365 import DetectionObject365DataModule

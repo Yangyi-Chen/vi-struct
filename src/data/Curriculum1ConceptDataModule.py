@@ -13,7 +13,7 @@ import math
 
 
 
-class Curriculum1ConceptDataModul(BaseDataModule):
+class Curriculum1ConceptDataModule(BaseDataModule):
     class Curriculum1ConceptDataset(torch.utils.data.Dataset):
         def __init__(self, config: dict, tokenizer: OFATokenizer):
             self.data_dir = config["data"]["dataset_dir"]
